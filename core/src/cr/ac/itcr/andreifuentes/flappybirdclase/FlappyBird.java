@@ -42,7 +42,7 @@ public class FlappyBird extends ApplicationAdapter {
 	float minLine;
 	int score;
 	int pipeActivo;
-	BitmapFont font;
+	BitmapFont font,menu;
 	int game_state;
 	int birdSize;
 	Sound flap, hit,point;
@@ -92,6 +92,10 @@ public class FlappyBird extends ApplicationAdapter {
 		font.setColor(Color.WHITE);
 		font.getData().setScale(7);
 
+		menu= new BitmapFont();
+		menu.setColor(Color.WHITE);
+		menu.getData().setScale(55/10);
+
 
 
 
@@ -120,13 +124,17 @@ public class FlappyBird extends ApplicationAdapter {
 
 		// no iniciado
 		if (game_state == 0){
+            menu.draw(batch, "Fácil", 24, Gdx.graphics.getHeight()*1/2-100);
+            menu.draw(batch, "Dificil", Gdx.graphics.getWidth()/2 +24, Gdx.graphics.getHeight()*1/2-100);
 
 			if (Gdx.input.justTouched()){
                 if (Gdx.input.getX() < Gdx.graphics.getWidth() / 2){
                     distance=d*15/10;//*5/6;
+                    gap=375;
                 }
                 else{
-                    distance=d*4/6;
+                    distance=d*5/7;
+                    gap=325;
                 }
 				game_state = 1;
 			}
@@ -231,12 +239,16 @@ public class FlappyBird extends ApplicationAdapter {
 		// game over
 		else if (game_state == 2){
 			batch.draw(gameOver, Gdx.graphics.getWidth()/2 - gameOver.getWidth()/2, Gdx.graphics.getHeight()/2 - gameOver.getHeight()/2);
+            menu.draw(batch, "Fácil", 24, Gdx.graphics.getHeight()*1/2-100);
+            menu.draw(batch, "Dificil", Gdx.graphics.getWidth()/2 +24, Gdx.graphics.getHeight()*1/2 -100);
 			if (Gdx.input.justTouched()){
                 if (Gdx.input.getX() < Gdx.graphics.getWidth() / 2){
                     distance=d*15/10;//*5/6;
+                    gap=375;
                 }
                 else{
                     distance=d*4/6;
+                    gap=325;
                 }
 				game_state = 1;
 				score = 0;
